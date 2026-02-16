@@ -1,21 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
-import { Cashfree } from "cashfree-pg";
+
 import { supabaseAdmin } from "@/lib/db";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeInput, isValidEmail, isValidPhone, errorResponse } from "@/lib/security";
 
-// Initialize Cashfree (v5 pattern)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const cashfree = new (Cashfree as any)(
-    process.env.CASHFREE_ENV === "PRODUCTION"
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ? (Cashfree as any).PRODUCTION
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        : (Cashfree as any).SANDBOX,
-    process.env.CASHFREE_APP_ID || "",
-    process.env.CASHFREE_SECRET_KEY || ""
-);
+import { cashfree } from "@/lib/cashfree";
 
 export async function POST(req: Request) {
     try {
@@ -73,8 +63,7 @@ export async function POST(req: Request) {
         };
 
         // Create order using Cashfree SDK
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const response = await (Cashfree as any).PGCreateOrder(
+        const response = await cashfree.PGCreateOrder(
             "2023-08-01",
             orderRequest
         );
