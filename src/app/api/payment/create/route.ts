@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import { Cashfree } from "cashfree-pg";
 import { supabaseAdmin } from "@/lib/db";
@@ -5,9 +6,12 @@ import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeInput, isValidEmail, isValidPhone, errorResponse } from "@/lib/security";
 
 // Initialize Cashfree (v5 pattern)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const cashfree = new (Cashfree as any)(
     process.env.CASHFREE_ENV === "PRODUCTION"
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ? (Cashfree as any).PRODUCTION
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         : (Cashfree as any).SANDBOX,
     process.env.CASHFREE_APP_ID || "",
     process.env.CASHFREE_SECRET_KEY || ""
@@ -68,7 +72,12 @@ export async function POST(req: Request) {
             },
         };
 
-        const response = await (Cashfree as any).PGCreateOrder(orderRequest);
+        // Create order using Cashfree SDK
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const response = await (Cashfree as any).PGCreateOrder(
+            "2023-08-01",
+            orderRequest
+        );
         const orderData = response.data;
 
         // Upsert pending registration in Supabase
@@ -96,8 +105,10 @@ export async function POST(req: Request) {
             payment_session_id: orderData?.payment_session_id || null,
             order_id: orderId,
         });
-    } catch (error: any) {
-        console.error("Payment Create Error:", error?.response?.data || error.message);
+    } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const err = error as any;
+        console.error("Payment Create Error:", err?.response?.data || err.message);
         return errorResponse("Failed to create payment. Please try again.", 500);
     }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, DollarSign, Clock, ExternalLink, ArrowRight, Trophy, Users, Sparkles } from "lucide-react";
+import { Briefcase, MapPin, DollarSign, ExternalLink, Trophy, Users, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const GOOGLE_FORM_URL = process.env.NEXT_PUBLIC_GOOGLE_FORM_URL || "https://forms.gle/your-form-id";

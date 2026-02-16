@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
-import { Bot, Send, User, Sparkles, MessageSquare, Brain, Shield, BookOpen, Rocket, HelpCircle, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Bot, Send, User, Sparkles, MessageSquare, Brain, Shield, BookOpen, ChevronDown, HelpCircle } from "lucide-react";
 
 const demoMessages = [
     { role: "user", text: "What is quantum computing?" },
@@ -120,8 +120,8 @@ export default function GenesisPage() {
                                     </div>
                                 )}
                                 <div className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${msg.role === "user"
-                                        ? "bg-primary-600 text-white"
-                                        : "bg-white/[0.04] text-neutral-300"
+                                    ? "bg-primary-600 text-white"
+                                    : "bg-white/[0.04] text-neutral-300"
                                     }`}>
                                     <span className="whitespace-pre-wrap">{msg.text}</span>
                                 </div>

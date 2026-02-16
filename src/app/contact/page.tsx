@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, MapPin, Send, Github, Twitter } from "lucide-react";
+import { Mail, MessageCircle, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
