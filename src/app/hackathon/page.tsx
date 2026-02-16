@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 
 const timeline = [
-    { step: "Register & Pay", desc: "Complete the ₹129 registration fee via secure Cashfree gateway.", icon: "💳" },
+    { step: "Register & Pay", desc: "Complete the ₹129 registration fee via secure Razorpay gateway.", icon: "💳" },
     { step: "Confirmation", desc: "Receive an automated email with rules and important dates.", icon: "📧" },
     { step: "Assessment", desc: "Receive assessment questions via email. 45-hour time limit.", icon: "📝" },
     { step: "DSA Round 1", desc: "Technical interview covering fundamental data structures & algorithms.", icon: "🧮" },
@@ -71,6 +71,30 @@ function CountdownTimer() {
     );
 }
 
+declare global {
+    // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
+    var Razorpay: any | undefined;
+}
+
+function loadRazorpayScript(): Promise<boolean> {
+    return new Promise((resolve) => {
+        if (typeof window === "undefined") {
+            return resolve(false);
+        }
+
+        if (window.Razorpay) {
+            return resolve(true);
+        }
+
+        const script = document.createElement("script");
+        script.src = "https://checkout.razorpay.com/v1/checkout.js";
+        script.async = true;
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+}
+
 export default function HackathonPage() {
     const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
     const [loading, setLoading] = useState(false);
@@ -88,18 +112,88 @@ export default function HackathonPage() {
             });
             const data = await res.json();
 
-            if (data.error) {
-                alert(data.error);
+            if (!res.ok || data.error) {
+                alert(data.error || "Unable to initiate payment. Please try again.");
                 return;
             }
 
-            if (data.payment_session_id) {
-                // Redirect to Cashfree checkout
-                window.location.href = `https://payments${process.env.NEXT_PUBLIC_CASHFREE_ENV === "PRODUCTION" ? "" : "-test"
-                    }.cashfree.com/order/#${data.payment_session_id}`;
-            } else {
-                alert("Could not initialize payment. Please try again.");
+            const scriptLoaded = await loadRazorpayScript();
+            if (!scriptLoaded || typeof window === "undefined" || !window.Razorpay) {
+                alert("Unable to load payment gateway. Please check your connection and try again.");
+                return;
             }
+
+            const options: {
+                key: string;
+                amount: number;
+                currency: string;
+                name: string;
+                description: string;
+                order_id: string;
+                prefill: {
+                    name: string;
+                    email: string;
+                    contact: string;
+                };
+                notes: Record<string, string>;
+                theme: { color: string };
+                handler: (response: {
+                    razorpay_order_id: string;
+                    razorpay_payment_id: string;
+                    razorpay_signature: string;
+                }) => Promise<void>;
+                modal: { ondismiss: () => void };
+            } = {
+                key: data.key,
+                amount: data.amount,
+                currency: data.currency,
+                name: "Genesis AI Hackathon 2026",
+                description: "Hackathon Registration Fee",
+                order_id: data.razorpayOrderId,
+                prefill: {
+                    name: formData.name,
+                    email: formData.email,
+                    contact: formData.phone,
+                },
+                notes: {
+                    hackathon: "Genesis AI Hackathon 2026",
+                },
+                theme: {
+                    color: "#4f46e5",
+                },
+                handler: async (response) => {
+                    try {
+                        const verifyRes = await fetch("/api/payment/verify", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                            }),
+                        });
+
+                        const verifyData = await verifyRes.json();
+
+                        if (verifyRes.ok && verifyData.success) {
+                            window.location.href = `/payment-success?id=${response.razorpay_order_id}`;
+                        } else {
+                            window.location.href = "/payment-failure?reason=verification_error";
+                        }
+                    } catch (err) {
+                        console.error("Verification Error:", err);
+                        window.location.href = "/payment-failure?reason=verification_error";
+                    }
+                },
+                modal: {
+                    ondismiss: () => {
+                        // User closed the Razorpay modal, no action needed
+                    },
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
         } catch (error) {
             console.error(error);
             alert("Something went wrong. Please try again.");
@@ -350,7 +444,7 @@ export default function HackathonPage() {
 
                         <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-neutral-600 uppercase tracking-widest">
                             <CheckCircle2 size={12} />
-                            Secured by Cashfree
+                            Secured by Razorpay
                         </div>
                     </div>
                 </div>

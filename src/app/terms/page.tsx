@@ -20,7 +20,7 @@ export default function TermsPage() {
                     <ul className="space-y-2 text-sm text-neutral-400 leading-relaxed list-disc pl-5">
                         <li>Registration fee of ₹129 is <strong className="text-white">non-refundable</strong> under any circumstances except event cancellation by Genesis.</li>
                         <li>Each participant may register only once with a unique email address.</li>
-                        <li>Payment is processed securely via Cashfree Payment Gateway.</li>
+                        <li>Payment is processed securely via Razorpay Payment Gateway.</li>
                     </ul>
                 </section>
 

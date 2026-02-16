@@ -42,7 +42,7 @@ export default function PrivacyPage() {
                     <h2 className="text-lg font-bold mb-4">Data Security</h2>
                     <ul className="space-y-2 text-sm text-neutral-400 leading-relaxed list-disc pl-5">
                         <li>All data is stored securely in encrypted databases (Supabase PostgreSQL).</li>
-                        <li>Payment information is processed by Cashfree and never stored on our servers.</li>
+                        <li>Payment information is processed by Razorpay and never stored on our servers.</li>
                         <li>We implement industry-standard security measures including HTTPS, input sanitization, and access controls.</li>
                     </ul>
                 </section>

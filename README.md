@@ -1,7 +1,7 @@
 # Genesis – Beginner-Friendly AI Platform
 
 A production-ready, scalable website for Genesis — a beginner-friendly LLM platform.  
-Built with Next.js 14, Supabase, Cashfree, and modern SaaS design principles.
+Built with Next.js 14, Supabase, Razorpay, and modern SaaS design principles.
 
 ---
 
@@ -12,7 +12,7 @@ Built with Next.js 14, Supabase, Cashfree, and modern SaaS design principles.
 | Frontend    | Next.js 14 (App Router), Tailwind CSS, Framer Motion |
 | Backend     | Next.js API Routes (Node.js)  |
 | Database    | Supabase (PostgreSQL)         |
-| Payment     | Cashfree PG SDK v5            |
+| Payment     | Razorpay Orders + Webhooks    |
 | Email       | Nodemailer (Queue-based)      |
 | Hosting     | Vercel + Supabase Cloud       |
 
@@ -37,9 +37,9 @@ src/
 │   ├── payment-success/      # Payment Success
 │   ├── payment-failure/      # Payment Failure
 │   └── api/
-│       ├── payment/create/   # Create Cashfree Order
-│       ├── payment/verify/   # Verify via Redirect
-│       ├── payment/webhook/  # Cashfree Webhook (Server-to-Server)
+│       ├── payment/create/   # Create Razorpay Order
+│       ├── payment/verify/   # Verify Razorpay Checkout Signature
+│       ├── payment/webhook/  # Razorpay Webhook (Server-to-Server)
 │       ├── admin/participants/
 │       ├── admin/update-status/
 │       ├── admin/send-assessment/
@@ -69,10 +69,13 @@ npm install
 2. Go to SQL Editor and run the contents of `supabase-schema.sql`
 3. Copy your project URL, anon key, and service role key
 
-### 3. Cashfree Setup
-1. Sign up at [cashfree.com](https://www.cashfree.com)
-2. Get your App ID and Secret Key from the dashboard
-3. Set up webhook URL: `https://your-domain.com/api/payment/webhook`
+### 3. Razorpay Setup
+1. Sign up at [razorpay.com](https://razorpay.com)
+2. Create an account and obtain your **Key ID** and **Key Secret**
+3. (Recommended) Create a Webhook with:
+   - **URL**: `https://your-domain.com/api/payment/webhook`
+   - **Events**: `payment.captured`, `payment.failed`
+   - **Secret**: a strong random string (use this as `RAZORPAY_WEBHOOK_SECRET`)
 
 ### 4. Google Form Setup
 1. Create a Google Form with fields: Full Name, Email, Phone, Resume Upload, Experience, LinkedIn URL
@@ -91,10 +94,11 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-# Cashfree
-CASHFREE_APP_ID=your_app_id
-CASHFREE_SECRET_KEY=your_secret_key
-CASHFREE_ENV=SANDBOX   # Change to PRODUCTION for live
+# Razorpay
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+RAZORPAY_WEBHOOK_SECRET=your_webhook_secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key_id  # Safe to expose; used by Razorpay Checkout
 
 # Email
 EMAIL_USER=your_email@gmail.com
@@ -125,7 +129,7 @@ npm start
 
 ## 🔐 Security Features
 
-- **Webhook Signature Verification**: HMAC-SHA256 validation for Cashfree webhooks
+- **Webhook Signature Verification**: HMAC-SHA256 validation for Razorpay webhooks and Checkout signatures
 - **Rate Limiting**: In-memory rate limiter (swap with Redis for production scale)
 - **Input Sanitization**: All user inputs are sanitized against XSS
 - **Admin Auth**: Bearer token authentication on all admin API routes
@@ -162,18 +166,18 @@ npm start
 ## 🔄 Payment Flow
 
 ```
-User → Register Form → /api/payment/create → Cashfree Order Created
+User → Register Form → /api/payment/create → Razorpay Order Created
                 ↓
-        Cashfree Checkout Page
+        Razorpay Checkout (client-side)
                 ↓
-        /api/payment/verify (Redirect) → Verify with Cashfree API
+        /api/payment/verify → Verify Checkout signature (HMAC-SHA256)
                 ↓
         + Supabase Update + Email Queue
                 ↓
         /payment-success or /payment-failure
 
   (In parallel)
-  Cashfree Server → /api/payment/webhook → HMAC Verify → Supabase Update + Email
+  Razorpay Webhook → /api/payment/webhook → HMAC Verify → Supabase Update + Email
 ```
 
 ---

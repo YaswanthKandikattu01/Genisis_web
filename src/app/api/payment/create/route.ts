@@ -4,8 +4,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/db";
 import { rateLimit } from "@/lib/rate-limit";
 import { sanitizeInput, isValidEmail, isValidPhone, errorResponse } from "@/lib/security";
-
-import { cashfree } from "@/lib/cashfree";
+import { getRazorpayClient } from "@/lib/razorpay";
 
 export async function POST(req: Request) {
     try {
@@ -43,31 +42,31 @@ export async function POST(req: Request) {
             return errorResponse("This email is already registered and paid.");
         }
 
-        const orderId = `genesis_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+        const publicKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+        if (!publicKey) {
+            return errorResponse("Payment configuration error. Please contact support.", 500);
+        }
 
-        // Create Cashfree order
-        const orderRequest = {
-            order_amount: 129,
-            order_currency: "INR",
-            order_id: orderId,
-            customer_details: {
-                customer_id: `cust_${Date.now()}`,
-                customer_name: name,
-                customer_email: email,
-                customer_phone: phone,
-            },
-            order_meta: {
-                return_url: `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/verify?order_id={order_id}`,
-                notify_url: `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/webhook`,
-            },
-        };
+        const razorpay = getRazorpayClient();
 
-        // Create order using Cashfree SDK
-        const response = await cashfree.PGCreateOrder(
-            "2023-08-01",
-            orderRequest
-        );
-        const orderData = response.data;
+        // Logical receipt ID for our own tracking (stored as Razorpay receipt)
+        const receiptId = `genesis_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+
+        // Amount is in paise for Razorpay (₹129 → 12900)
+        const amountInPaise = 129 * 100;
+
+        const order = await razorpay.orders.create({
+            amount: amountInPaise,
+            currency: "INR",
+            receipt: receiptId,
+            notes: {
+                email,
+                name,
+                phone,
+            },
+        });
+
+        const razorpayOrderId = order.id as string;
 
         // Upsert pending registration in Supabase
         if (existing) {
@@ -76,7 +75,7 @@ export async function POST(req: Request) {
                 .update({
                     full_name: name,
                     phone,
-                    order_id: orderId,
+                    order_id: razorpayOrderId,
                     payment_status: "pending",
                 })
                 .eq("email", email);
@@ -85,19 +84,21 @@ export async function POST(req: Request) {
                 full_name: name,
                 email,
                 phone,
-                order_id: orderId,
+                order_id: razorpayOrderId,
                 payment_status: "pending",
             });
         }
 
         return NextResponse.json({
-            payment_session_id: orderData?.payment_session_id || null,
-            order_id: orderId,
+            key: publicKey,
+            razorpayOrderId,
+            amount: amountInPaise,
+            currency: "INR",
         });
     } catch (error) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const err = error as any;
-        console.error("Payment Create Error:", err?.response?.data || err.message);
+        console.error("Payment Create Error:", err?.response?.data || err.message || err);
         return errorResponse("Failed to create payment. Please try again.", 500);
     }
 }

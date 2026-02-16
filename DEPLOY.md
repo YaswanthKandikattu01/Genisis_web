@@ -45,9 +45,10 @@ In the "Configure Project" screen:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
-   - `CASHFREE_APP_ID`
-   - `CASHFREE_SECRET_KEY`
-   - `CASHFREE_ENV` (Set to `PRODUCTION` for live payments, or `SANDBOX` for testing)
+   - `RAZORPAY_KEY_ID`
+   - `RAZORPAY_KEY_SECRET`
+   - `RAZORPAY_WEBHOOK_SECRET`
+   - `NEXT_PUBLIC_RAZORPAY_KEY_ID`
    - `EMAIL_USER` (Your Gmail address)
    - `EMAIL_PASS` (Your Gmail App Password)
    - `ADMIN_PASSWORD` (Your secure admin password)
@@ -61,15 +62,16 @@ In the "Configure Project" screen:
 
 ## 3. Post-Deployment Setup
 
-### Update Cashfree Webhook
+### Update Razorpay Webhook
 Once deployed, Vercel will give you a domain (e.g., `https://genesis-hackathon.vercel.app`).
-1. Log in to Cashfree Dashboard.
-2. Go to **Developers > Webhooks**.
+1. Log in to Razorpay Dashboard.
+2. Go to **Settings > Webhooks**.
 3. Set the Webhook URL to:
    ```
    https://YOUR_VERCEL_DOMAIN.app/api/payment/webhook
    ```
-4. Verify the webhook.
+4. Use the same secret you configured as `RAZORPAY_WEBHOOK_SECRET`.
+5. Enable at least the `payment.captured` and `payment.failed` events.
 
 ### Test Production
 1. Go to your new Vercel URL.

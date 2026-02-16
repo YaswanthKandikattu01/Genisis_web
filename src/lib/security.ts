@@ -1,19 +1,35 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-// Verify Cashfree webhook signature
-export function verifyCashfreeWebhook(
-    rawBody: string,
-    timestamp: string,
-    signature: string
-): boolean {
-    const secretKey = process.env.CASHFREE_SECRET_KEY || "";
-    const body = timestamp + rawBody;
+// Verify Razorpay webhook signature using webhook secret
+export function verifyRazorpayWebhook(rawBody: string, signature: string): boolean {
+    const secret = process.env.RAZORPAY_WEBHOOK_SECRET || "";
+    if (!secret || !signature) return false;
+
     const expectedSignature = crypto
-        .createHmac("sha256", secretKey)
-        .update(body)
-        .digest("base64");
+        .createHmac("sha256", secret)
+        .update(rawBody)
+        .digest("hex");
+
     return expectedSignature === signature;
+}
+
+// Verify Razorpay payment signature from Checkout
+export function verifyRazorpayPaymentSignature(
+    razorpayOrderId: string,
+    razorpayPaymentId: string,
+    razorpaySignature: string
+): boolean {
+    const secret = process.env.RAZORPAY_KEY_SECRET || "";
+    if (!secret) return false;
+
+    const payload = `${razorpayOrderId}|${razorpayPaymentId}`;
+    const expectedSignature = crypto
+        .createHmac("sha256", secret)
+        .update(payload)
+        .digest("hex");
+
+    return expectedSignature === razorpaySignature;
 }
 
 // Sanitize input strings
