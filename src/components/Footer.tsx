@@ -13,7 +13,7 @@ const footerLinks = {
         { name: "Refund Policy", href: "/refunds" },
     ],
     Product: [
-        { name: "Genesis AI", href: "/genesis" },
+        { name: "Genesis Labs", href: "/genesis" },
         { name: "Features", href: "/features" },
         { name: "Hackathon 2026", href: "/hackathon" },
     ],
@@ -67,7 +67,7 @@ export default function Footer() {
                 {/* Bottom */}
                 <div className="mt-16 pt-8 border-t border-white/[0.04] flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-xs text-neutral-600">
-                        © 2026 Genesis AI Platform. All rights reserved.
+                        © 2026 Genesis Labs Platform. All rights reserved.
                     </p>
                     <div className="flex items-center gap-6">
                         <span className="text-xs text-neutral-600">Built with ❤️ for the future</span>

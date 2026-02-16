@@ -50,7 +50,7 @@ export default function PrivacyPage() {
                 <section className="glass-card">
                     <h2 className="text-lg font-bold mb-4">Your Rights</h2>
                     <ul className="space-y-2 text-sm text-neutral-400 leading-relaxed list-disc pl-5">
-                        <li>You may request deletion of your data by contacting support@genesis-ai.com.</li>
+                        <li>You may request deletion of your data by contacting kandikattu.career@gmail.com.</li>
                         <li>You may opt out of promotional emails at any time.</li>
                         <li>Contact us for any data-related queries or concerns.</li>
                     </ul>

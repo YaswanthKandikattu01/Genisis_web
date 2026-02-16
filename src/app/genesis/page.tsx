@@ -2,12 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Bot, Send, User, Sparkles, MessageSquare, Brain, Shield, BookOpen, ChevronDown, HelpCircle } from "lucide-react";
-
-const demoMessages = [
-    { role: "user", text: "What is quantum computing?" },
-    { role: "ai", text: "Great question! Quantum computing is a type of computation that uses quantum-mechanical phenomena like superposition and entanglement. Think of it this way:\n\n🔹 **Classical computers** use bits (0 or 1)\n🔹 **Quantum computers** use qubits that can be 0, 1, or both at the same time!\n\nThis allows quantum computers to solve certain problems much faster than classical ones.\n\nWant me to explain any of these concepts further?" },
-];
+import { Sparkles, MessageSquare, Brain, Shield, BookOpen, ChevronDown, HelpCircle } from "lucide-react";
 
 const capabilities = [
     { icon: Brain, title: "Multi-Domain Q&A", desc: "From science to coding, history to mathematics — Genesis handles questions across every subject." },
@@ -31,19 +26,7 @@ const faqs = [
 ];
 
 export default function GenesisPage() {
-    const [chatInput, setChatInput] = useState("");
-    const [messages, setMessages] = useState(demoMessages);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-    const handleSend = () => {
-        if (!chatInput.trim()) return;
-        setMessages([
-            ...messages,
-            { role: "user", text: chatInput },
-            { role: "ai", text: "I'm a demo! In the full version, I'd provide a detailed, beginner-friendly answer to your question. Stay tuned for the public beta! 🚀" },
-        ]);
-        setChatInput("");
-    };
 
     return (
         <div className="max-w-7xl mx-auto px-6">
@@ -66,7 +49,7 @@ export default function GenesisPage() {
                     transition={{ delay: 0.1 }}
                     className="section-heading mb-6"
                 >
-                    Meet <span className="gradient-text">Genesis</span>
+                    Meet <span className="gradient-text">Genesis Labs</span>
                 </motion.h1>
 
                 <motion.p
@@ -85,75 +68,10 @@ export default function GenesisPage() {
                     transition={{ delay: 0.3 }}
                     className="text-sm text-neutral-500 max-w-xl mx-auto"
                 >
-                    Genesis is a Large Language Model (LLM) built with accessibility at its core.
-                    Unlike traditional AI assistants, Genesis prioritizes simplicity — making AI
+                    Genesis Labs is a Large Language Model (LLM) built with accessibility at its core.
+                    Unlike traditional AI assistants, Genesis Labs prioritizes simplicity — making AI
                     technology available to everyone, regardless of technical background.
                 </motion.p>
-            </section>
-
-            {/* ─── DEMO CHAT ─── */}
-            <section className="mb-32">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-3xl mx-auto glass rounded-[2rem] overflow-hidden"
-                >
-                    {/* Chat header */}
-                    <div className="p-5 border-b border-white/[0.06] flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                            <Bot size={16} className="text-white" />
-                        </div>
-                        <div>
-                            <span className="font-semibold text-sm">Genesis AI</span>
-                            <span className="text-xs text-green-400 ml-2">● Online</span>
-                        </div>
-                    </div>
-
-                    {/* Messages */}
-                    <div className="p-6 space-y-6 max-h-[400px] overflow-y-auto">
-                        {messages.map((msg, i) => (
-                            <div key={i} className={`flex gap-3 ${msg.role === "user" ? "justify-end" : ""}`}>
-                                {msg.role === "ai" && (
-                                    <div className="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                                        <Bot size={14} className="text-primary-400" />
-                                    </div>
-                                )}
-                                <div className={`max-w-[80%] rounded-2xl px-5 py-3 text-sm leading-relaxed ${msg.role === "user"
-                                    ? "bg-primary-600 text-white"
-                                    : "bg-white/[0.04] text-neutral-300"
-                                    }`}>
-                                    <span className="whitespace-pre-wrap">{msg.text}</span>
-                                </div>
-                                {msg.role === "user" && (
-                                    <div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-1">
-                                        <User size={14} className="text-neutral-400" />
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Input */}
-                    <div className="p-4 border-t border-white/[0.06]">
-                        <div className="flex gap-3">
-                            <input
-                                type="text"
-                                value={chatInput}
-                                onChange={(e) => setChatInput(e.target.value)}
-                                onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                                placeholder="Ask Genesis anything..."
-                                className="flex-1 bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm outline-none focus:border-primary/40 transition-colors"
-                            />
-                            <button
-                                onClick={handleSend}
-                                className="px-4 py-3 bg-primary-600 rounded-xl hover:bg-primary-500 transition-colors"
-                            >
-                                <Send size={18} />
-                            </button>
-                        </div>
-                    </div>
-                </motion.div>
             </section>
 
             {/* ─── CAPABILITIES ─── */}

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "Genesis AI", href: "/genesis" },
+  { name: "Genesis Labs", href: "/genesis" },
   { name: "Hackathon", href: "/hackathon" },
   { name: "Features", href: "/features" },
   { name: "About", href: "/about" },

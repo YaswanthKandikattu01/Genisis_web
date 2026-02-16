@@ -23,7 +23,7 @@ function SuccessContent() {
 
                 <h1 className="text-3xl font-bold mb-4">Payment Successful!</h1>
                 <p className="text-neutral-400 mb-8 leading-relaxed">
-                    Your registration for Genesis AI Hackathon 2026 is confirmed.
+                    Your registration for Genesis Labs Hackathon 2026 is confirmed.
                     A confirmation email has been sent to your registered address.
                 </p>
 

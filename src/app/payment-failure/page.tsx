@@ -43,7 +43,7 @@ function FailureContent() {
                 </div>
 
                 <p className="text-xs text-neutral-600 mt-8">
-                    If you were charged, contact support@genesis-ai.com with your details.
+                    If you were charged, contact kandikattu.career@gmail.com with your details.
                 </p>
             </motion.div>
         </div>

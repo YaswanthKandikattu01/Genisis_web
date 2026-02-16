@@ -26,7 +26,7 @@ async function processQueue() {
         const item = emailQueue.shift()!;
         try {
             await transporter.sendMail({
-                from: `"Genesis AI" <${process.env.EMAIL_USER}>`,
+                from: `"Genesis Labs" <${process.env.EMAIL_USER}>`,
                 ...item.payload,
             });
             console.log(`✅ Email sent to ${item.payload.to}`);
@@ -53,11 +53,11 @@ export function enqueueEmail(payload: EmailPayload) {
 export function sendRegistrationConfirmation(name: string, email: string) {
     enqueueEmail({
         to: email,
-        subject: "✅ Registration Confirmed – Genesis AI Hackathon 2026",
+        subject: "✅ Registration Confirmed – Genesis Labs Hackathon 2026",
         html: `
       <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: auto; background: #0a0a0f; color: #fafafa; border-radius: 16px; overflow: hidden;">
         <div style="background: linear-gradient(135deg, #6366f1, #06b6d4); padding: 40px 30px; text-align: center;">
-          <h1 style="margin: 0; font-size: 28px; color: white;">Welcome to Genesis Hackathon 2026</h1>
+          <h1 style="margin: 0; font-size: 28px; color: white;">Welcome to Genesis Labs Hackathon 2026</h1>
         </div>
         <div style="padding: 30px;">
           <p style="font-size: 16px;">Hello <strong>${name}</strong>,</p>
@@ -79,10 +79,10 @@ export function sendRegistrationConfirmation(name: string, email: string) {
           </div>
           
           <p>Best of luck!</p>
-          <p style="color: #71717a;">— Team Genesis</p>
+          <p style="color: #71717a;">— Team Genesis Labs</p>
         </div>
         <div style="background: #18181b; padding: 20px; text-align: center; font-size: 12px; color: #52525b;">
-          Genesis AI Platform &copy; 2026 | This is an automated email
+          Genesis Labs Platform &copy; 2026 | This is an automated email
         </div>
       </div>
     `,
@@ -93,7 +93,7 @@ export function sendRegistrationConfirmation(name: string, email: string) {
 export function sendAssessmentEmail(email: string, assessmentLink: string = "#") {
     enqueueEmail({
         to: email,
-        subject: "🧠 Genesis Hackathon 2026 – Assessment Started",
+        subject: "🧠 Genesis Labs Hackathon 2026 – Assessment Started",
         html: `
       <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: auto; background: #0a0a0f; color: #fafafa; border-radius: 16px; overflow: hidden;">
         <div style="background: linear-gradient(135deg, #6366f1, #06b6d4); padding: 40px 30px; text-align: center;">
@@ -117,7 +117,7 @@ export function sendAssessmentEmail(email: string, assessmentLink: string = "#")
             <a href="${assessmentLink}" style="background: #6366f1; color: white; padding: 16px 32px; border-radius: 12px; text-decoration: none; font-weight: bold; display: inline-block;">Start Assessment</a>
           </div>
           
-          <p style="color: #71717a;">— Team Genesis</p>
+          <p style="color: #71717a;">— Team Genesis Labs</p>
         </div>
       </div>
     `,

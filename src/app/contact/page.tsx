@@ -48,13 +48,13 @@ export default function ContactPage() {
                         transition={{ delay: 0.1 }}
                         className="text-lg text-neutral-400 mb-12 leading-relaxed"
                     >
-                        Have questions about Genesis or the Hackathon? Our team is here to help.
+                        Have questions about Genesis Labs or the Hackathon? Our team is here to help.
                         Expect a response within 24 hours.
                     </motion.p>
 
                     <div className="space-y-8">
                         {[
-                            { icon: Mail, title: "Email", desc: "support@genesis-ai.com" },
+                            { icon: Mail, title: "Email", desc: "kandikattu.career@gmail.com" },
                             { icon: MessageCircle, title: "Live Chat", desc: "Available 10 AM – 6 PM IST" },
                             { icon: MapPin, title: "Office", desc: "Remote-First | HQ: Bengaluru, India" },
                         ].map((item, i) => (

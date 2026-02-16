@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import {
     Trophy,
     Calendar,
@@ -32,44 +32,6 @@ const faqs = [
     { q: "When will I receive the assessment?", a: "Assessment questions will be sent to your registered email on the specified date. You will be notified in advance." },
     { q: "What is the salary range?", a: "Selected candidates will be offered SDE-1 (Remote) roles with ₹10–16 LPA based on assessment performance, interview scores, and experience." },
 ];
-
-function CountdownTimer() {
-    const targetDate = new Date("2026-03-15T00:00:00+05:30").getTime();
-
-    const calculateTimeLeft = useCallback(() => {
-        const now = Date.now();
-        const diff = targetDate - now;
-        if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-        return {
-            days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-            seconds: Math.floor((diff % (1000 * 60)) / 1000),
-        };
-    }, [targetDate]);
-
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-    useEffect(() => {
-        const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
-        return () => clearInterval(timer);
-    }, [calculateTimeLeft]);
-
-    return (
-        <div className="flex items-center gap-3">
-            {Object.entries(timeLeft).map(([unit, value]) => (
-                <div key={unit} className="flex flex-col items-center">
-                    <div className="w-14 h-14 md:w-16 md:h-16 glass rounded-xl flex items-center justify-center text-xl md:text-2xl font-bold font-mono text-white">
-                        {String(value).padStart(2, "0")}
-                    </div>
-                    <span className="text-[10px] text-neutral-500 uppercase tracking-widest mt-1.5 font-medium">
-                        {unit}
-                    </span>
-                </div>
-            ))}
-        </div>
-    );
-}
 
 declare global {
     // eslint-disable-next-line no-var, @typescript-eslint/no-explicit-any
@@ -147,7 +109,7 @@ export default function HackathonPage() {
                 key: data.key,
                 amount: data.amount,
                 currency: data.currency,
-                name: "Genesis AI Hackathon 2026",
+                name: "Genesis Labs Hackathon 2026",
                 description: "Hackathon Registration Fee",
                 order_id: data.razorpayOrderId,
                 prefill: {
@@ -156,7 +118,7 @@ export default function HackathonPage() {
                     contact: formData.phone,
                 },
                 notes: {
-                    hackathon: "Genesis AI Hackathon 2026",
+                    hackathon: "Genesis Labs Hackathon 2026",
                 },
                 theme: {
                     color: "#4f46e5",
@@ -223,31 +185,27 @@ export default function HackathonPage() {
                     transition={{ delay: 0.1 }}
                     className="section-heading mb-6"
                 >
-                    Genesis AI <span className="gradient-text">Hackathon 2026</span>
+                    Genesis Labs <span className="gradient-text">Hackathon 2026</span>
                 </motion.h1>
 
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="section-subheading mx-auto mb-12"
+                    className="section-subheading mx-auto mb-8"
                 >
                     Compete for a full-time SDE-1 Remote role with ₹10–16 LPA salary.
                     Open to freshers. Prove your skills. Land your dream job.
                 </motion.p>
 
-                {/* Countdown */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="flex flex-col items-center gap-4 mb-12"
+                    className="flex items-center justify-center gap-2 mb-12 text-sm text-neutral-400"
                 >
-                    <div className="flex items-center gap-2 text-sm text-neutral-400">
-                        <Clock size={16} className="text-accent" />
-                        <span>Registration closes March 15, 2026</span>
-                    </div>
-                    <CountdownTimer />
+                    <Clock size={16} className="text-accent" />
+                    <span>Registration closes February 28, 2026</span>
                 </motion.div>
 
                 {/* Quick info pills */}

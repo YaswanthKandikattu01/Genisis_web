@@ -73,7 +73,7 @@ export default function CareersPage() {
                         Software Development Engineer – 1
                     </h2>
                     <p className="text-neutral-400 mb-8 max-w-2xl leading-relaxed">
-                        We&apos;re looking for talented engineers to build and scale Genesis AI.
+                        We&apos;re looking for talented engineers to build and scale Genesis Labs.
                         You&apos;ll work on LLM integration, API development, and full-stack product features.
                     </p>
 

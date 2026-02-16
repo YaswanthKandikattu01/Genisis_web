@@ -1,6 +1,6 @@
-# Genesis – Beginner-Friendly AI Platform
+# Genesis Labs – Beginner-Friendly AI Platform
 
-A production-ready, scalable website for Genesis — a beginner-friendly LLM platform.  
+A production-ready, scalable website for Genesis Labs — a beginner-friendly LLM platform.  
 Built with Next.js 14, Supabase, Razorpay, and modern SaaS design principles.
 
 ---
@@ -101,7 +101,7 @@ RAZORPAY_WEBHOOK_SECRET=your_webhook_secret
 NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key_id  # Safe to expose; used by Razorpay Checkout
 
 # Email
-EMAIL_USER=your_email@gmail.com
+EMAIL_USER=kandikattu.career@gmail.com
 EMAIL_PASS=your_app_password
 
 # Admin
@@ -184,8 +184,8 @@ User → Register Form → /api/payment/create → Razorpay Order Created
 
 ## ⚖️ Legal Disclaimer
 
-> Genesis Hackathon is an independent hiring initiative. Final job offers are subject to internal evaluation and verification.
+> Genesis Labs Hackathon is an independent hiring initiative. Final job offers are subject to internal evaluation and verification.
 
 ---
 
-Built with ❤️ by Genesis AI Team
+Built with ❤️ by Genesis Labs Team
