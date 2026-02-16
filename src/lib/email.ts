@@ -67,6 +67,7 @@ export function sendRegistrationConfirmation(name: string, email: string) {
             <h3 style="margin-top: 0; color: #6366f1;">📋 Important Information</h3>
             <ul style="line-height: 2; padding-left: 20px;">
               <li><strong>Assessment Date:</strong> Will be communicated via email</li>
+              <li><strong>Assessment Link:</strong> You will receive the assessment link and detailed instructions in a separate email soon.</li>
               <li><strong>Time Limit:</strong> 45 hours from start</li>
               <li><strong>Role:</strong> SDE-1 (Remote)</li>
               <li><strong>Salary Range:</strong> ₹10–16 LPA</li>
@@ -82,6 +83,43 @@ export function sendRegistrationConfirmation(name: string, email: string) {
           <p style="color: #71717a;">— Team Genesis Labs</p>
         </div>
         <div style="background: #18181b; padding: 20px; text-align: center; font-size: 12px; color: #52525b;">
+          Genesis Labs Platform &copy; 2026 | This is an automated email
+        </div>
+      </div>
+    `,
+    });
+}
+
+// Send payment failure notification
+export function sendPaymentFailureEmail(name: string | null, email: string) {
+    const safeName = name && name.trim().length > 0 ? name : "Participant";
+
+    enqueueEmail({
+        to: email,
+        subject: "❌ Payment Failed – Genesis Labs Hackathon 2026",
+        html: `
+      <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: auto; background: #0a0a0f; color: #fafafa; border-radius: 16px; overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #ef4444, #b91c1c); padding: 32px 24px; text-align: center;">
+          <h1 style="margin: 0; font-size: 24px; color: white;">Payment Attempt Unsuccessful</h1>
+        </div>
+        <div style="padding: 24px;">
+          <p style="font-size: 15px;">Hello <strong>${safeName}</strong>,</p>
+          <p>We detected a payment attempt for the <strong>Genesis Labs Hackathon 2026</strong>, but it was not completed successfully.</p>
+
+          <div style="background: #18181b; border-radius: 12px; padding: 18px; margin: 18px 0; border-left: 4px solid #ef4444;">
+            <h3 style="margin-top: 0; color: #ef4444;">What this means</h3>
+            <ul style="line-height: 1.8; padding-left: 20px; font-size: 14px;">
+              <li>If an amount was deducted, it will typically be <strong>reversed automatically</strong> by your bank/payment provider.</li>
+              <li>Your hackathon registration is <strong>not confirmed</strong> until a successful payment is recorded.</li>
+              <li>You can safely try the payment again from the registration page.</li>
+            </ul>
+          </div>
+
+          <p style="font-size: 14px;">If you continue to face issues, please contact us at <strong>kandikattu.career@gmail.com</strong> with your registered email and any transaction reference you received.</p>
+
+          <p style="margin-top: 24px; font-size: 14px;">— Team Genesis Labs</p>
+        </div>
+        <div style="background: #18181b; padding: 16px; text-align: center; font-size: 12px; color: #52525b;">
           Genesis Labs Platform &copy; 2026 | This is an automated email
         </div>
       </div>
