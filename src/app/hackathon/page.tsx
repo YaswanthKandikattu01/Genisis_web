@@ -18,19 +18,19 @@ import {
 const timeline = [
     { step: "Register & Pay", desc: "Complete the ₹129 registration fee via secure Razorpay gateway.", icon: "💳" },
     { step: "Confirmation", desc: "Receive an automated email with rules and important dates.", icon: "📧" },
-    { step: "Assessment", desc: "Receive assessment questions via email. 45-hour time limit.", icon: "📝" },
+    { step: "Assessment + Live Project", desc: "Work on 1 real-world project to showcase practical skills and problem-solving.", icon: "🧪" },
     { step: "DSA Round 1", desc: "Technical interview covering fundamental data structures & algorithms.", icon: "🧮" },
-    { step: "DSA Round 2", desc: "Advanced problem-solving and system design discussion.", icon: "🏗️" },
     { step: "HR Interview", desc: "Cultural fit, behavioral assessment, and expectations alignment.", icon: "🤝" },
-    { step: "Offer Letter", desc: "SDE-1 (Remote) | ₹10–16 LPA based on performance.", icon: "🎉" },
+    { step: "Offer & Rewards", desc: "Top 1–2: Apple Mac M4 laptops + placement (₹10–25 LPA). Top 3–10: Apple iPad Pro.", icon: "🎉" },
 ];
 
 const faqs = [
     { q: "Who can participate?", a: "Anyone! Freshers and experienced professionals are both welcome. There are no prerequisites." },
     { q: "Is the ₹129 fee refundable?", a: "No. The registration fee is non-refundable as per our terms. Refunds are only issued if the event is cancelled by Genesis." },
     { q: "Can I use AI tools during the assessment?", a: "Absolutely not. Use of ChatGPT, Gemini, Copilot, or any AI coding assistant is strictly prohibited and will result in immediate disqualification." },
-    { q: "When will I receive the assessment?", a: "Assessment questions will be sent to your registered email on the specified date. You will be notified in advance." },
-    { q: "What is the salary range?", a: "Selected candidates will be offered SDE-1 (Remote) roles with ₹10–16 LPA based on assessment performance, interview scores, and experience." },
+    { q: "When will I receive the assessment?", a: "Assessment/test links will be sent to your registered email 1 day before March 1st, 2026. The test will be conducted on March 1st, 2026." },
+    { q: "What is the salary range?", a: "Top 1–2 candidates will receive placement opportunities with ₹10–25 LPA based on performance. Top 3–10 will receive Apple iPad Pro." },
+    { q: "When will winners be announced?", a: "Winners will be announced on March 8th, 2026 at 5:30 PM IST exactly." },
 ];
 
 declare global {
@@ -194,7 +194,7 @@ export default function HackathonPage() {
                     transition={{ delay: 0.2 }}
                     className="section-subheading mx-auto mb-8"
                 >
-                    Compete for a full-time SDE-1 Remote role with ₹10–16 LPA salary.
+                    Compete for a full-time SDE-1 Remote role with ₹10–25 LPA salary and exciting Apple hardware rewards.
                     Open to freshers. Prove your skills. Land your dream job.
                 </motion.p>
 
@@ -257,6 +257,36 @@ export default function HackathonPage() {
                                     </div>
                                 </motion.div>
                             ))}
+                        </div>
+                    </section>
+
+                    {/* Important Dates */}
+                    <section className="glass-card p-8">
+                        <h2 className="text-xl font-bold mb-6 flex items-center gap-3">
+                            <Calendar className="text-primary" size={20} /> Important Dates
+                        </h2>
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-4">
+                                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                <div>
+                                    <h3 className="font-semibold text-white mb-1">Assessment Links Sent</h3>
+                                    <p className="text-sm text-neutral-500">February 28, 2026 (1 day before test)</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
+                                <div>
+                                    <h3 className="font-semibold text-white mb-1">Test Date</h3>
+                                    <p className="text-sm text-neutral-500">March 1, 2026</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="w-2 h-2 rounded-full bg-green-400 mt-2 flex-shrink-0" />
+                                <div>
+                                    <h3 className="font-semibold text-white mb-1">Winners Announcement</h3>
+                                    <p className="text-sm text-neutral-500">March 8, 2026 at 5:30 PM IST</p>
+                                </div>
+                            </div>
                         </div>
                     </section>
 

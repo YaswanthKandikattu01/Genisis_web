@@ -64,13 +64,14 @@ export function sendRegistrationConfirmation(name: string, email: string) {
           <p>Your registration fee of <strong>₹129</strong> has been received successfully.</p>
           
           <div style="background: #18181b; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 4px solid #6366f1;">
-            <h3 style="margin-top: 0; color: #6366f1;">📋 Important Information</h3>
+            <h3 style="margin-top: 0; color: #6366f1;">📋 Important Dates & Information</h3>
             <ul style="line-height: 2; padding-left: 20px;">
-              <li><strong>Assessment Date:</strong> Will be communicated via email</li>
-              <li><strong>Assessment Link:</strong> You will receive the assessment link and detailed instructions in a separate email soon.</li>
-              <li><strong>Time Limit:</strong> 45 hours from start</li>
+              <li><strong>Assessment Links Sent:</strong> February 28, 2026 (1 day before test)</li>
+              <li><strong>Test Date:</strong> March 1, 2026</li>
+              <li><strong>Winners Announcement:</strong> March 8, 2026 at 5:30 PM IST</li>
               <li><strong>Role:</strong> SDE-1 (Remote)</li>
-              <li><strong>Salary Range:</strong> ₹10–16 LPA</li>
+              <li><strong>Top 1–2 Rewards:</strong> Apple Mac M4 laptops + placement (₹10–25 LPA)</li>
+              <li><strong>Top 3–10 Rewards:</strong> Apple iPad Pro</li>
             </ul>
           </div>
           
