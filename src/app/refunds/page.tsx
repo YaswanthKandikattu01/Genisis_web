@@ -52,7 +52,7 @@ export default function RefundsPage() {
                     <h2 className="text-lg font-bold mb-4">How to Request a Refund</h2>
                     <p className="text-sm text-neutral-400 leading-relaxed">
                         If you believe you are eligible for a refund, please email{" "}
-                        <strong className="text-primary-400">kandikattu.career@gmail.com</strong>{" "}
+                        <strong className="text-primary-400">genisisailabs@gmail.com</strong>{" "}
                         with your registered email, transaction ID, and reason for the request.
                         Our team will respond within 48 hours.
                     </p>

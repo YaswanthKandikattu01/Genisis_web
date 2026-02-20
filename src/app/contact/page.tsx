@@ -54,7 +54,7 @@ export default function ContactPage() {
 
                     <div className="space-y-8">
                         {[
-                            { icon: Mail, title: "Email", desc: "kandikattu.career@gmail.com" },
+                            { icon: Mail, title: "Email", desc: "genisisailabs@gmail.com" },
                             { icon: MessageCircle, title: "Live Chat", desc: "Available 10 AM – 6 PM IST" },
                             { icon: MapPin, title: "Office", desc: "Remote-First | HQ: Bengaluru, India" },
                         ].map((item, i) => (
