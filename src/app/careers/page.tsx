@@ -1,10 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, DollarSign, ExternalLink, Trophy, Users, Sparkles, ArrowRight } from "lucide-react";
+import { Briefcase, MapPin, DollarSign, Trophy, Users, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-const GOOGLE_FORM_URL = process.env.NEXT_PUBLIC_GOOGLE_FORM_URL || "https://forms.gle/your-form-id";
 
 const benefits = [
     "Competitive salary: ₹10–16 LPA",
