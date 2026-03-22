@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Briefcase, MapPin, DollarSign, ExternalLink, Trophy, Users, Sparkles } from "lucide-react";
+import { Briefcase, MapPin, DollarSign, ExternalLink, Trophy, Users, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const GOOGLE_FORM_URL = process.env.NEXT_PUBLIC_GOOGLE_FORM_URL || "https://forms.gle/your-form-id";
@@ -46,7 +46,7 @@ export default function CareersPage() {
                     className="section-subheading mx-auto"
                 >
                     Join a team of builders creating the world&apos;s most accessible AI platform.
-                    Apply via the hackathon or directly below.
+                    Apply exclusively via the hackathon below.
                 </motion.p>
             </section>
 
@@ -93,15 +93,7 @@ export default function CareersPage() {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a
-                            href={GOOGLE_FORM_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn-white flex items-center justify-center gap-2"
-                        >
-                            Apply Now <ExternalLink size={16} />
-                        </a>
-                        <Link href="/hackathon" className="btn-secondary flex items-center justify-center gap-2">
+                        <Link href="/hackathon" className="btn-white flex items-center justify-center gap-2">
                             <Trophy size={16} /> Apply via Hackathon
                         </Link>
                     </div>
@@ -133,25 +125,20 @@ export default function CareersPage() {
             {/* ─── HOW TO APPLY ─── */}
             <section className="pb-32">
                 <div className="max-w-2xl mx-auto text-center glass p-10 md:p-14 rounded-[2rem]">
-                    <h2 className="text-2xl font-bold mb-6">Two Ways to Apply</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-                        <div className="space-y-3">
-                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <h2 className="text-2xl font-bold mb-6">How to Apply</h2>
+                    <div className="grid grid-cols-1 gap-8 text-left max-w-md mx-auto">
+                        <div className="space-y-3 p-6 glass border border-primary/20 rounded-2xl">
+                            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                                 <Trophy size={18} className="text-primary" />
                             </div>
-                            <h3 className="font-semibold">Via Hackathon</h3>
-                            <p className="text-sm text-neutral-500 leading-relaxed">
-                                Register for the Genesis Hackathon 2026 (₹129). Top performers get direct interviews and offers.
+                            <h3 className="font-semibold text-lg text-white">Exclusive Track: Genesis Hackathon</h3>
+                            <p className="text-sm text-neutral-400 leading-relaxed pb-2">
+                                We are exclusively hiring our next SDE-1 through the Genesis Hackathon 2026. 
+                                Secure your spot, build a live project, and prove your skills to get a direct offer!
                             </p>
-                        </div>
-                        <div className="space-y-3">
-                            <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                                <ExternalLink size={18} className="text-accent" />
-                            </div>
-                            <h3 className="font-semibold">Direct Application</h3>
-                            <p className="text-sm text-neutral-500 leading-relaxed">
-                                Submit your application via Google Form with your resume, experience, and LinkedIn profile.
-                            </p>
+                            <Link href="/hackathon" className="text-primary text-sm font-semibold flex items-center gap-2 hover:text-primary-300 transition-colors">
+                                Go to Hackathon Page <ArrowRight size={14} />
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import {
     Trophy,
     Calendar,
@@ -28,9 +29,9 @@ const faqs = [
     { q: "Who can participate?", a: "Anyone! Freshers and experienced professionals are both welcome. There are no prerequisites." },
     { q: "Is the ₹129 fee refundable?", a: "No. The registration fee is non-refundable as per our terms. Refunds are only issued if the event is cancelled by Genesis." },
     { q: "Can I use AI tools during the assessment?", a: "Absolutely not. Use of ChatGPT, Gemini, Copilot, or any AI coding assistant is strictly prohibited and will result in immediate disqualification." },
-    { q: "When will I receive the assessment?", a: "Assessment/test links will be sent to your registered email 1 day before March 1st, 2026. The test will be conducted on March 1st, 2026." },
+    { q: "When will I receive the assessment?", a: "Once you register for the assessment, then you will get the link. The test will be conducted on April 1st, 2026." },
     { q: "What is the salary range?", a: "Top 1–2 candidates will receive placement opportunities with ₹10–25 LPA based on performance. Top 3–10 will receive Apple iPad Pro." },
-    { q: "When will winners be announced?", a: "Winners will be announced on March 8th, 2026 at 5:30 PM IST exactly." },
+    { q: "When will winners be announced?", a: "Winners will be announced on April 22nd, 2026." },
 ];
 
 declare global {
@@ -194,8 +195,7 @@ export default function HackathonPage() {
                     transition={{ delay: 0.2 }}
                     className="section-subheading mx-auto mb-8"
                 >
-                    Compete for a full-time SDE-1 Remote role with ₹10–25 LPA salary and exciting Apple hardware rewards.
-                    Open to freshers. Prove your skills. Land your dream job.
+                    The only way to apply for our full-time SDE-1 Remote role is via this hackathon. Prove your skills, land your dream job with ₹10–25 LPA salary, and win exciting Apple hardware rewards!
                 </motion.p>
 
                 <motion.div
@@ -205,13 +205,13 @@ export default function HackathonPage() {
                     className="flex items-center justify-center gap-2 mb-12 text-sm text-neutral-400"
                 >
                     <Clock size={16} className="text-accent" />
-                    <span>Registration closes February 28, 2026</span>
+                    <span>Registration closes March 31st, 2026</span>
                 </motion.div>
 
                 {/* Quick info pills */}
                 <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
                     <div className="glass px-4 py-2 rounded-full flex items-center gap-2 text-neutral-300">
-                        <Target size={14} className="text-primary" /> SDE-1 Role
+                        <Target size={14} className="text-primary" /> Apply for SDE-1 via Hackathon
                     </div>
                     <div className="glass px-4 py-2 rounded-full flex items-center gap-2 text-neutral-300">
                         <Users size={14} className="text-accent" /> Freshers Welcome
@@ -219,6 +219,46 @@ export default function HackathonPage() {
                     <div className="glass px-4 py-2 rounded-full flex items-center gap-2 text-neutral-300">
                         <Calendar size={14} className="text-green-400" /> Remote Position
                     </div>
+                </div>
+            </section>
+
+            {/* ─── PAST MEMORIES / IMAGES ─── */}
+            <section className="pb-16 md:pb-24">
+                <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold flex items-center justify-center gap-3">
+                        <Users className="text-primary" size={24} /> Join the Genesis Community
+                    </h2>
+                    <p className="text-neutral-400 mt-2">See our past winners and participants in action.</p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="rounded-2xl overflow-hidden glass border border-white/10"
+                    >
+                        <Image 
+                            src="/hackathon_winners.jpg" 
+                            alt="Past Winners" 
+                            width={800} 
+                            height={500}
+                            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                    </motion.div>
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="rounded-2xl overflow-hidden glass border border-white/10"
+                    >
+                        <Image 
+                            src="/hackathon_participants.jpg" 
+                            alt="Hackathon Participants" 
+                            width={800} 
+                            height={500}
+                            className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                        />
+                    </motion.div>
                 </div>
             </section>
 
@@ -270,21 +310,21 @@ export default function HackathonPage() {
                                 <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                                 <div>
                                     <h3 className="font-semibold text-white mb-1">Assessment Links Sent</h3>
-                                    <p className="text-sm text-neutral-500">February 28, 2026 (1 day before test)</p>
+                                    <p className="text-sm text-neutral-500">March 31st, 2026</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
                                 <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                                 <div>
                                     <h3 className="font-semibold text-white mb-1">Test Date</h3>
-                                    <p className="text-sm text-neutral-500">March 1, 2026</p>
+                                    <p className="text-sm text-neutral-500">April 1st, 2026</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
                                 <div className="w-2 h-2 rounded-full bg-green-400 mt-2 flex-shrink-0" />
                                 <div>
                                     <h3 className="font-semibold text-white mb-1">Winners Announcement</h3>
-                                    <p className="text-sm text-neutral-500">March 8, 2026 at 5:30 PM IST</p>
+                                    <p className="text-sm text-neutral-500">April 22nd, 2026</p>
                                 </div>
                             </div>
                         </div>
